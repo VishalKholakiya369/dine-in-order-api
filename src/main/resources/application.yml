@@ -3,7 +3,7 @@ spring:
     name: dine-in-order-api
 
   datasource:
-    url: jdbc:mysql://localhost:3306/dine_in_db?createIfNotExists=true
+    url: jdbc:mysql://localhost:3306/dine_in_db?createDatabaseIfNotExist=true
     username: root
     password: root
   jpa:
