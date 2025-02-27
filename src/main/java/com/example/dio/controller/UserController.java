@@ -2,6 +2,7 @@ package com.example.dio.controller;
 
 import com.example.dio.model.User;
 import com.example.dio.service.UserService;
+import com.example.dio.util.ResponseBuilder;
 import com.example.dio.util.ResponseStructur;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,10 @@ public class UserController {
     public ResponseEntity<ResponseStructur<User>> registerUser(@RequestBody User user){
         user = userService.registerUser(user);
 
-        ResponseStructur<User> structur = new ResponseStructur<>();
-        structur.setData(user);
-        structur.setStatus(HttpStatus.CREATED.value());
-        structur.setMessage("User Created");
-
-        return new ResponseEntity<ResponseStructur<User>>(structur,HttpStatus.CREATED);
+    return ResponseBuilder.success(HttpStatus.CREATED,"User Created",user);
     }
+
+  
 
 
 }
