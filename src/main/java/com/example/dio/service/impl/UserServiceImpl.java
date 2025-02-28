@@ -6,6 +6,7 @@ import com.example.dio.model.Staff;
 import com.example.dio.model.User;
 import com.example.dio.repository.UserRepository;
 import com.example.dio.service.UserService;
+import com.example.dio.exception.UserNotFoundByIdException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,14 @@ public class UserServiceImpl implements UserService {
         this.mapToNewUser(user,user2);
         return userRepository.save(user2);
     }
+
+    @Override
+    public User findUserById(long userId) {
+        return userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Faild to find user"));
+    }
+
+
+
 
     private User createUserByRole(UserRole role){
         User user;
@@ -42,4 +51,6 @@ public class UserServiceImpl implements UserService {
         user2.setCreatAt(user.getCreatAt());
         user2.setLastModifirdAt(user.getLastModifirdAt());
     }
+
+
 }
