@@ -1,10 +1,6 @@
 package com.example.dio.service.impl;
 
-import com.example.dio.dto.request.RegistrationRequest;
-import com.example.dio.dto.request.UserRequest;
-import com.example.dio.dto.response.UserResponse;
 import com.example.dio.enums.UserRole;
-import com.example.dio.mapper.UserMapper;
 import com.example.dio.model.Admin;
 import com.example.dio.model.Staff;
 import com.example.dio.model.User;
@@ -19,41 +15,20 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Override
-    public UserResponse registerUser(RegistrationRequest registrationRequest) {
-        User user = this.createUserByRole(registrationRequest.getRole());
+    public User registerUser(User user) {
+        User user2 = this.createUserByRole(user.getRole());
 
-       // this.mapToNewUser(user,user2);
-       // this.mapToEntity(registrationRequest,user);
-        userMapper.mapToEntity(registrationRequest, user);
-        userRepository.save(user);
-        return userMapper.mapToUserResponse(user);
-    }
-
-
-
-
-
-    @Override
-    public UserResponse findUserById(long userId) {
-//        User user= userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Faild to find user"));
-//        return this.mapToUserResponse(user);
-        return userRepository.findById(userId)
-                .map(userMapper::mapToUserResponse)
-                .orElseThrow(()-> new UserNotFoundByIdException("Faild to find user,user not found by id"));
+        this.mapToNewUser(user,user2);
+        return userRepository.save(user2);
     }
 
     @Override
-    public UserResponse updateUserById(long userId, UserRequest userRequest) {
-        User existingUser = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundByIdException("Failed to find user"));
-        userMapper.mapToNewUser(userRequest, existingUser);
-        User updatedUser = userRepository.save(existingUser);
-      //  existingUser.setUsername(updatedUser.getUsername());
-        return userMapper.mapToUserResponse(updatedUser);
+    public User findUserById(long userId) {
+        return userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Faild to find user"));
     }
+
 
 
 
@@ -67,15 +42,15 @@ public class UserServiceImpl implements UserService {
         return  user;
     }
 
-//    private void mapToNewUser(User source,User target){
-//        target.setUsername(source.getUsername());
-//        target.setEmail(source.getEmail());
-//        target.setPassword(source.getPassword());
-//        target.setRole(source.getRole());
-//        target.setPhNo(source.getPhNo());
-//        target.setCreatAt(source.getCreatAt());
-//        target.setLastModifirdAt(source.getLastModifirdAt());
-//    }
+    private void mapToNewUser(User user,User user2){
+        user2.setUsername(user.getUsername());
+        user2.setEmail(user.getEmail());
+        user2.setPassword(user.getPassword());
+        user2.setRole(user.getRole());
+        user2.setPhNo(user.getPhNo());
+        user2.setCreatAt(user.getCreatAt());
+        user2.setLastModifirdAt(user.getLastModifirdAt());
+    }
 
 
 }
