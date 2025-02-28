@@ -33,6 +33,7 @@ public class User {
     @Column(name = "ph_no")
    private long phNo;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
    private UserRole role;
 
