@@ -13,4 +13,15 @@ public class ResponseBuilder {
         return ResponseEntity.status(status).body(structur);
     }
 
+    public static ResponseEntity<SimpleErrorResponse> error(HttpStatus status, String rootCause) {
+        SimpleErrorResponse error = SimpleErrorResponse.builder()
+                .type(status.name())
+                .status(status.value())
+                .rootCouse(rootCause)
+                .build();
+
+        return ResponseEntity.status(status).body(error);
+    }
+
+
 }
