@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-     UserResponse mapToUserResponse(User user);
-     void mapToEntity(RegistrationRequest registrationRequest,@MappingTarget User user) ;
-     void mapToNewUser(UserRequest userRequest,@MappingTarget User existingUser);
+    UserResponse mapToUserResponse(User user);
+    void mapToEntity(RegistrationRequest registrationRequest,@MappingTarget User user) ;
+    void mapToNewUser(UserRequest userRequest,@MappingTarget User existingUser);
 }
