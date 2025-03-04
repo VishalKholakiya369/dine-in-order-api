@@ -3,7 +3,7 @@ package com.example.dio.controller;
 import com.example.dio.dto.request.RegistrationRequest;
 import com.example.dio.dto.request.UserRequest;
 import com.example.dio.dto.response.UserResponse;
-
+import com.example.dio.model.User;
 import com.example.dio.service.UserService;
 import com.example.dio.util.FieldErrorResponse;
 import com.example.dio.util.ResponseBuilder;
@@ -13,18 +13,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.*;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("${app.base-url}")
-@Tag(name="User Controller",description = "Collection API Endpoint dealing user data.")
+
 public class UserController {
 
     private final UserService userService;
@@ -34,12 +31,12 @@ public class UserController {
             The API Endpoint is used to register the user.
             The endpoint requires the user to select one of the specification role along with the othr details.
             """,
-    responses ={
-            @ApiResponse(responseCode = "201",description = "User Created"),
-            @ApiResponse(responseCode = "400",description = "Invalid Input",content = {
-                    @Content(schema = @Schema(implementation = FieldErrorResponse.class))
-            }),
-    })
+            responses ={
+                    @ApiResponse(responseCode = "201",description = "User Created"),
+                    @ApiResponse(responseCode = "400",description = "Invalid Input",content = {
+                            @Content(schema = @Schema(implementation = FieldErrorResponse.class))
+                    }),
+            })
     public ResponseEntity<ResponseStructur<UserResponse>> registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
         UserResponse response = userService.registerUser(registrationRequest);
 

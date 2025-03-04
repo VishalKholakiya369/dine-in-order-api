@@ -32,6 +32,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.mapToUserResponse(user);
     }
 
+
+
+
+
     @Override
     public UserResponse findUserById(long userId) {
 //        User user= userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Faild to find user"));
@@ -44,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse updateUserById(long userId, UserRequest userRequest) {
         User existingUser = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundByIdException("Failed to update the user,user not found by id"));
+                .orElseThrow(() -> new UserNotFoundByIdException("Failed to find user"));
         userMapper.mapToNewUser(userRequest, existingUser);
         User updatedUser = userRepository.save(existingUser);
       //  existingUser.setUsername(updatedUser.getUsername());
