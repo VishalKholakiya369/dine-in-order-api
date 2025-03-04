@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 public class UserExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity<SimpleErrorResponse> getMessage(UserNotFoundByIdException ex){
+    public ResponseEntity<SimpleErrorResponse> handlerUserNotFoundById(UserNotFoundByIdException ex){
        return ResponseBuilder.error(HttpStatus.NOT_FOUND,ex.getMessage());
 
 
