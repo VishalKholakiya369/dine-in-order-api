@@ -12,6 +12,7 @@ import org.apache.logging.log4j.message.Message;
 @Getter
 @Setter
 public class RegistrationRequest {
+
     @NotEmpty(message = "Username can not be null or blank")
     @NotBlank(message = "Username can not be blank")
     @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username can only contain Alphabets,Number and Underscore")
