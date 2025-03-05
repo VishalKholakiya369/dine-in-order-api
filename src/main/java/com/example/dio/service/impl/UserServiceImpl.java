@@ -55,7 +55,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.mapToUserResponse(updatedUser);
     }
 
-
+    /**
+     * Produces and returns child instance of the User based on the user role.
+     *
+     * @param role The role of the user
+     * @return User the parent reference containing either of Staff or Admin instance.
+     */
 
     private User createUserByRole(UserRole role){
         User user;
