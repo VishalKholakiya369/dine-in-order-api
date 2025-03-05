@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-
+@RequestMapping("${app.base-url}")
 public class UserController {
 
     private final UserService userService;
@@ -40,7 +40,7 @@ public class UserController {
     public ResponseEntity<ResponseStructur<UserResponse>> registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
         UserResponse response = userService.registerUser(registrationRequest);
 
-        return ResponseBuilder.success(HttpStatus.CREATED, "User Created", response);
+        return ResponseBuilder.created("user created",response);
     }
 
 
@@ -57,7 +57,7 @@ public class UserController {
             })
     public ResponseEntity<ResponseStructur<UserResponse>> findUserById(@PathVariable long userId) {
         UserResponse response = userService.findUserById(userId);
-        return ResponseBuilder.success(HttpStatus.OK, "User Found", response);
+        return ResponseBuilder.ok("user found",response);
     }
 
 
@@ -77,7 +77,7 @@ public class UserController {
             })
     public ResponseEntity<ResponseStructur<UserResponse>> updateUserById(@PathVariable long userId, @RequestBody UserRequest userRequest) {
         UserResponse response = userService.updateUserById(userId, userRequest);
-        return ResponseBuilder.success(HttpStatus.OK, "User Updated", response);
+        return ResponseBuilder.ok("User Updated",response);
     }
 
 
