@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -26,21 +27,24 @@ public class Restaurant {
     private String address;
 
     @Column(name = "contact_no")
-    private long coNo;
+    private String coNo;
 
     @Column(name = "contact_email")
     private String contactEmail;
 
     @Column(name = "opens_at")
-    private LocalDateTime opens_at;
+    private LocalTime opens_at;
 
     @Column(name = "closes_at")
-    private LocalDateTime closesAt;
+    private LocalTime closes_at;
 
     @Column(name = "diet_type")
-    private DietType dietType;
+    private List<DietType> dietType;
 
-    @ManyToMany(mappedBy = "CusineType",fetch = FetchType.EAGER)
-    private List<CuisingType> cuisingType;
+    @ManyToMany(mappedBy = "restaurants",fetch = FetchType.EAGER)
+    private List<CuisingType> cuisine;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Admin admin;
 
 }

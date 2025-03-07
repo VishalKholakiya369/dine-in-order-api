@@ -12,12 +12,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "cuisingtype")
+@Table(name = "cuisingType")
 public class CuisingType {
 
     @Id
     private String cuisine;
 
-    @ManyToMany()
+    @ManyToMany
     private List<Restaurant> restaurants;
 }
