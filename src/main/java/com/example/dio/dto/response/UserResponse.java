@@ -8,11 +8,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 @Getter
 @Setter
-@Builder
 public class UserResponse {
     private long userId;
     private String username;
     private UserRole role;
-    private LocalDateTime creatAt;
-    private LocalDateTime lastModifirdAt;
+    private LocalDateTime createAt;
+    private LocalDateTime lastModifiedAt;
 }

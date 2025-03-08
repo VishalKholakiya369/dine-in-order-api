@@ -31,16 +31,17 @@ public class User {
    private String password;
 
     @Column(name = "ph_no")
-   private long phNo;
+   private String phNo;
 
     @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
    private UserRole role;
 
-    @Column(name = "creates_at")
-    private LocalDateTime creatAt;
+    @Column(name = "create_at")
+    private LocalDateTime createAt;
 
-    @Column(name = "last_modifird_at")
-    private LocalDateTime lastModifirdAt;
+    @Column(name = "last_modified_at")
+    private LocalDateTime lastModifiedAt;
 
 
 }
