@@ -1,9 +1,6 @@
 package com.example.dio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +15,6 @@ public class CuisingType {
     @Id
     private String cuisine;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "cuisingTypes",fetch = FetchType.EAGER)
     private List<Restaurant> restaurants;
 }
