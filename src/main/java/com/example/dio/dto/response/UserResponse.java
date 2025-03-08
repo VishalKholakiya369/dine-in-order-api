@@ -12,6 +12,6 @@ public class UserResponse {
     private long userId;
     private String username;
     private UserRole role;
-    private LocalDateTime creatAt;
-    private LocalDateTime lastModifirdAt;
+    private LocalDateTime createAt;
+    private LocalDateTime lastModifiedAt;
 }

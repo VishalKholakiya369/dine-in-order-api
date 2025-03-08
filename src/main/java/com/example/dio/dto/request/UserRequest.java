@@ -22,6 +22,6 @@ public class UserRequest {
 
     @NotEmpty(message = "Phone number can not be null or blank")
     @NotBlank(message = "Phone number can not be blank ")
-    @Pattern(regexp = "^[7-9]d{9}$",message = "Invalid phone number")
-    private long phno;
+    @Pattern(regexp = "^[7-9]\\d{9}$",message = "Invalid phone number")
+    private String phno;
 }

@@ -39,10 +39,11 @@ public class Restaurant {
     private LocalTime closes_at;
 
     @Column(name = "diet_type")
+    @Enumerated(EnumType.STRING)
     private List<DietType> dietType;
 
-    @ManyToMany(mappedBy = "restaurants",fetch = FetchType.EAGER)
-    private List<CuisingType> cuisine;
+    @ManyToMany
+    private List<CuisingType> cuisingTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;

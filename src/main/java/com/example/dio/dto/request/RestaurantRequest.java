@@ -34,7 +34,7 @@ public class RestaurantRequest {
 
     @NotEmpty(message = "contact number can not be null or blank")
     @NotBlank(message = "contact number can not be blank")
-    @Pattern(regexp = "^[7-9]d{9}$",message = "Invalid contact number")
+    @Pattern(regexp = "^[7-9]\\d{9}$",message = "Invalid contact number")
     private String coNo;
 
     @NotEmpty(message = "contactEmail can not be null or blank")
@@ -42,21 +42,10 @@ public class RestaurantRequest {
     @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String contactEmail;
 
-    @NotEmpty(message = "opens_at can not be null or blank")
-    @NotBlank(message = "opens_at can not be blank")
-    @Pattern(regexp = "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$",message = "Invalid Time")
-    @Column(name = "opens_at")
-    private LocalTime opens_at;
 
-    @NotEmpty(message = "closes_at can not be null or blank")
-    @NotBlank(message = "closes_at can not be blank")
-    @Pattern(regexp = "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$",message = "Invalid Time")
+    private LocalTime opens_at;
     private LocalTime closes_at;
 
     private List<DietType> dietType;
-
-    @NotEmpty(message = "Cuisines can not be null or blank")
-    @NotBlank(message = "Cuisines can not be blank")
-    @Pattern(regexp = "^[A-Za-z ]{3,30}$")
-   private List<String> cuisine;
+    private List<String> cuisingTypes;
 }

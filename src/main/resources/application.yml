@@ -12,4 +12,4 @@ spring:
         ddl-auto: update
 
 app:
-  base-url: /api/v1s
+  base-url: /api/v1
