@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "restaurant")
+//@jakarta.persistence.Table(name = "restaurant")
 public class Restaurant {
 
     @Id
@@ -47,5 +47,8 @@ public class Restaurant {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<RestaurantTable> tables;
 
 }
