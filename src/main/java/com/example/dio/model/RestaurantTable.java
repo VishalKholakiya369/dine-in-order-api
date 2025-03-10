@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -28,10 +29,14 @@ public class RestaurantTable {
     @Enumerated(EnumType.STRING)
     private TableStatus tableStatus;
 
+    private LocalDate createAt;
+    private LocalDate lastModifiedAt;
+
     @ManyToOne
     private Restaurant restaurant;
 
     @ManyToMany(mappedBy = "tables")
     private List<Staff> staffs;
+
 
 }

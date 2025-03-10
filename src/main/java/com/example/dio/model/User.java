@@ -39,10 +39,10 @@ public class User {
    private UserRole role;
 
     @Column(name = "create_at")
-    private LocalDateTime createAt;
+    private LocalDate createAt;
 
     @Column(name = "last_modified_at")
-    private LocalDateTime lastModifiedAt;
+    private LocalDate lastModifiedAt;
 
 
 }
