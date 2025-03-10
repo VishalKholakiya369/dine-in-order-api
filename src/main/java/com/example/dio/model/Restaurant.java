@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -42,11 +42,8 @@ public class Restaurant {
     @Enumerated(EnumType.STRING)
     private List<DietType> dietType;
 
-    private LocalDate createAt;
-    private LocalDate lastModifiedAt;
-
     @ManyToMany
-    private List<CuisineType> cuisineTypes;
+    private List<CuisingType> cuisingTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;
@@ -56,6 +53,5 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<FoodItem> foodItems;
-
 
 }

@@ -1,12 +1,10 @@
 package com.example.dio.model;
 
-import com.example.dio.enums.DietType;
 import com.example.dio.enums.ItemAvailability;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -39,18 +37,8 @@ public class FoodItem {
     @Column(name = "item_availability")
     private ItemAvailability itemAvailability;
 
-    private DietType dietType;
-    private LocalDate createAt;
-    private LocalDate lastModifiedAt;
-
-    @ManyToOne
-    private CuisineType cuisineType;
-
     @ManyToOne
     private Restaurant restaurant;
-
-    @ManyToMany(mappedBy = "foodItems")
-    private List<Category> categories;
 
 
 

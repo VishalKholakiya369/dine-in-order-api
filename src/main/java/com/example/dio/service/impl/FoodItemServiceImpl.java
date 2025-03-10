@@ -4,11 +4,9 @@ import com.example.dio.dto.request.FoodItemRequest;
 import com.example.dio.dto.response.FoodItemResponse;
 import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.mapper.FoodItemMapper;
-import com.example.dio.model.Category;
-import com.example.dio.model.CuisineType;
+import com.example.dio.model.CuisingType;
 import com.example.dio.model.FoodItem;
 import com.example.dio.model.Restaurant;
-import com.example.dio.repository.CategoryRepository;
 import com.example.dio.repository.CuisineRepository;
 import com.example.dio.repository.FoodItemRepository;
 import com.example.dio.repository.RestaurantRepository;
@@ -27,7 +25,6 @@ public class FoodItemServiceImpl implements FoodItemService {
     private  final CuisineRepository cuisineRepository;
     private   FoodItemRepository foodItemRepository;
     private final FoodItemMapper foodItemMapper;
-    private final CategoryRepository categoryRepository;
 
 
     @Transactional
@@ -37,12 +34,10 @@ public class FoodItemServiceImpl implements FoodItemService {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new UserNotFoundByIdException("Restaurant not found"));
 
-
-
         // Check if cuisine exists in restaurant's list
-        List<CuisineType> restaurantCuisines = restaurant.getCuisineTypes();
+        List<CuisingType> restaurantCuisines = restaurant.getCuisingTypes();
 
-        CuisineType cuisine = restaurantCuisines.stream()
+        CuisingType cuisine = restaurantCuisines.stream()
                 .filter(c -> c.getCuisine().equalsIgnoreCase(foodItemRequest.getItemCuisine()))
                 .findFirst()
                 .orElseGet(() -> {
@@ -50,7 +45,7 @@ public class FoodItemServiceImpl implements FoodItemService {
                         throw new IllegalArgumentException("Cuisine name cannot be null or empty");
                     }
 
-                    CuisineType newCuisine = new CuisineType();
+                    CuisingType newCuisine = new CuisingType();
                     newCuisine.setCuisine(foodItemRequest.getItemCuisine());
 
                     return cuisineRepository.save(newCuisine); // Explicit save
@@ -58,30 +53,21 @@ public class FoodItemServiceImpl implements FoodItemService {
 
 
         FoodItem foodItem = foodItemMapper.mapToFoodItem(foodItemRequest);
-        foodItem.setItemCuisine(cuisine.getCuisine());
+        foodItem.setItemCuisine(cuisine.getCuisine());  // Assign cuisine string
         foodItem.setRestaurant(restaurant);
 
-        List<Category> categories = this.createNonExistingCategoey(foodItem.getCategories());
-        foodItem.setCategories(categories);
-      //  foodItem.setRestaurant(restaurant);
+        foodItem = foodItemRepository.save(foodItem);
 
-        foodItemRepository.save(foodItem);
-
-
+        // Update restaurant with new cuisine (if added)
         if (!restaurantCuisines.contains(cuisine)) {
-            restaurant.getCuisineTypes().add(cuisine);
+            restaurant.getCuisingTypes().add(cuisine);
             restaurantRepository.save(restaurant);
         }
 
         // Convert to response DTO
         return foodItemMapper.mapToFoodItemResponse(foodItem);
     }
-    private List<Category> createNonExistingCategoey(List<Category> categories){
-        return categories.stream()
-                .map(type -> categoryRepository.findById(type.getCategory())
-                        .orElseGet(()-> categoryRepository.save(type)))
-                .toList();
-    }
+
 
 
     }

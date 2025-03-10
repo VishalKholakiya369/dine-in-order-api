@@ -6,7 +6,7 @@ import com.example.dio.exception.CustomAccessDeniedException;
 import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.mapper.RestaurantMapper;
 import com.example.dio.model.Admin;
-import com.example.dio.model.CuisineType;
+import com.example.dio.model.CuisingType;
 import com.example.dio.model.Restaurant;
 import com.example.dio.model.User;
 import com.example.dio.repository.CuisineRepository;
@@ -33,8 +33,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         if(user instanceof Admin admin){
             Restaurant restaurant = restaurantMapper.mapToRestaurant(restaurantRequest);
 
-            List<CuisineType> cuisine = this.createNonExistingCuisines(restaurant.getCuisineTypes());
-            restaurant.setCuisineTypes(cuisine);
+            List<CuisingType> cuising = this.createNonExistingCuisines(restaurant.getCuisingTypes());
+            restaurant.setCuisingTypes(cuising);
             restaurant.setAdmin(admin);
               restaurantRepository.save(restaurant);
             return restaurantMapper.mapToRestaurantResponse(restaurant);
@@ -42,8 +42,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         throw new CustomAccessDeniedException("Only admins can create a restaurant.");
     }
 
-    private List<CuisineType> createNonExistingCuisines(List<CuisineType> cuisineTypes){
-    return cuisineTypes.stream()
+    private List<CuisingType> createNonExistingCuisines(List<CuisingType> cuisineType){
+    return cuisineType.stream()
             .map(type -> cuisineRepository.findById(type.getCuisine())
                     .orElseGet(()-> cuisineRepository.save(type)))
             .toList();
