@@ -2,7 +2,7 @@ package com.example.dio.mapper;
 
 import com.example.dio.dto.request.RestaurantRequest;
 import com.example.dio.dto.response.RestaurantResponse;
-import com.example.dio.model.CuisingType;
+import com.example.dio.model.CuisineType;
 import com.example.dio.model.Restaurant;
 import org.mapstruct.Mapper;
 
@@ -26,35 +26,35 @@ public interface RestaurantMapper {
     RestaurantResponse  mapToRestaurantResponse( Restaurant restaurant);
 
     /**
-     * Converts a {@link CuisingType} enum to its string representation.
+     * Converts a {@link CuisineType} enum to its string representation.
      *
-     * @param cuisingType The {@link CuisingType} enum to be converted.
+     * @param cuisineType The {@link CuisineType} enum to be converted.
      * @return A {@link String} representation of the cuisine type.
      */
-   default String mapToString (CuisingType cuisingType){
-        if(cuisingType==null)
+   default String mapToString (CuisineType cuisineType){
+        if(cuisineType ==null)
         {
             return null;
         }
-        return cuisingType.getCuisine();
+        return cuisineType.getCuisine();
     }
 
     /**
-     * Converts a string to the corresponding {@link CuisingType} enum.
+     * Converts a string to the corresponding {@link CuisineType} enum.
      *
-     * @param cuisingType The string representation of the cuisine type.
-     * @return The corresponding {@link CuisingType}  value.
+     * @param cuisineType The string representation of the cuisine type.
+     * @return The corresponding {@link CuisineType}  value.
      * @throws IllegalArgumentException if the provided string does not match any valid cuisine type.
      */
-    default CuisingType mapToCuisingType(String cuisingType){
-        if(cuisingType==null)
+    default CuisineType mapToCuisineType(String cuisineType){
+        if(cuisineType==null)
         {
             return null;
         }
-        CuisingType cuisingType1=new CuisingType();
-        cuisingType1.setCuisine(cuisingType);
+        CuisineType cuisine1 =new CuisineType();
+        cuisine1.setCuisine(cuisineType);
 
-        return cuisingType1;
+        return cuisine1;
     }
 }
 

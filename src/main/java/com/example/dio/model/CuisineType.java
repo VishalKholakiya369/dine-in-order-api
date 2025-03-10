@@ -11,11 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "cuisingType")
-public class CuisingType {
+public class CuisineType {
 
     @Id
     private String cuisine;
 
-    @ManyToMany(mappedBy = "cuisingTypes",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cuisineType" )
+    private List<FoodItem> foodItems;
+
+    @ManyToMany(mappedBy = "cuisineTypes",fetch = FetchType.EAGER)
     private List<Restaurant> restaurants;
 }
