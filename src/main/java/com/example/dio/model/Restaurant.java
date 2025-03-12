@@ -4,6 +4,9 @@ import com.example.dio.enums.DietType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 //@jakarta.persistence.Table(name = "restaurant")
 public class Restaurant {
 
@@ -42,7 +46,10 @@ public class Restaurant {
     @Enumerated(EnumType.STRING)
     private List<DietType> dietType;
 
+    @CreatedDate
     private LocalDate createAt;
+
+    @LastModifiedDate
     private LocalDate lastModifiedAt;
 
     @ManyToMany
