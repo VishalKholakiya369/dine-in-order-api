@@ -79,6 +79,19 @@ public class FoodItemServiceImpl implements FoodItemService {
         }
     }
 
+    @Override
+    public List<FoodItemResponse> getFoodItemsByRestaurant(long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(()->new UserNotFoundByIdException("Restaurant not found"));
+
+        List<FoodItem> foodItems = foodItemRepository.findAllFoodItemsByRestaurant(restaurant);
+
+        if(foodItems.isEmpty()){
+            throw new UserNotFoundByIdException("No food items found for restaurant :"+restaurant.getName());
+        }
+        return foodItemMapper.mapToListFoodItemResponse(foodItems);
+    }
+
     private List<CuisineType> updateRestaurantCuisineList(Restaurant restaurant, CuisineType cuisine) {
         // Check if cuisine exists in restaurant's list
         List<CuisineType> restaurantCuisines = restaurant.getCuisineTypes();

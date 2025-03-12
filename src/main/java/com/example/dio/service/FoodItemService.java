@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface FoodItemService {
 
-    FoodItemResponse createFoodItem(FoodItemRequest foodItemRequest, long restaurantId);
+   public FoodItemResponse createFoodItem(FoodItemRequest foodItemRequest, long restaurantId);
 
-    List<FoodItemResponse> findFoodItemsByCategory(List<String> categoryName);
+    public List<FoodItemResponse> findFoodItemsByCategory(List<String> categoryName);
+
+   public List<FoodItemResponse> getFoodItemsByRestaurant(long restaurantId);
 }

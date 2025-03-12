@@ -33,4 +33,12 @@ public class FoodItemController {
         List<FoodItemResponse> foodItems = foodItemService.findFoodItemsByCategory(categories);
         return ResponseBuilder.ok("Food items found", foodItems);
     }
+
+    @GetMapping("restaurant/{restaurantId}/food-items")
+    public ResponseEntity<ResponseStructur<List<FoodItemResponse>>> getFoodItemsByRestaurant(
+            @PathVariable long restaurantId) {
+
+        List<FoodItemResponse> foodItems = foodItemService.getFoodItemsByRestaurant(restaurantId);
+        return ResponseBuilder.ok("Food items for restaurant found", foodItems);
+    }
 }
