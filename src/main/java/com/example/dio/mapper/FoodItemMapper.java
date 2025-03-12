@@ -18,6 +18,7 @@ public interface FoodItemMapper {
 
     public List<FoodItemResponse> mapToListFoodItemResponse(List<FoodItem> foodItems);
 
+
     default String mapToString (Category category){
         if(category ==null)
         {

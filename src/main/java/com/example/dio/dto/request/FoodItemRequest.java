@@ -35,4 +35,6 @@ public class FoodItemRequest {
     private long itemStock;
 
     private ItemAvailability itemAvailability;
+
+    private List<String> categories;
 }

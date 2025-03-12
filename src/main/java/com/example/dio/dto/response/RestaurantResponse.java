@@ -33,7 +33,7 @@ public class RestaurantResponse {
     private List<DietType> dietType;
 
 
-    private List<String> cuisingTypes;
+    private List<String> cuisineTypes;
 
 
 }

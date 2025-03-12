@@ -24,4 +24,6 @@ public class FoodItemResponse {
     private long itemStock;
 
     private ItemAvailability itemAvailability;
+
+    private List<String> categories;
 }
