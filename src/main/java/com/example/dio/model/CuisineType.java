@@ -10,12 +10,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "cuisingType")
-public class CuisingType {
+@Table(name = "cuisine_type")
+public class CuisineType {
 
     @Id
     private String cuisine;
 
-    @ManyToMany(mappedBy = "cuisingTypes",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "cuisineTypes",fetch = FetchType.EAGER)
     private List<Restaurant> restaurants;
 }

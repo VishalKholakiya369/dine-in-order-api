@@ -5,12 +5,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "restaurant_table")
 public class RestaurantTable {
 
     @Id
@@ -27,6 +33,12 @@ public class RestaurantTable {
     @Column(name = "table_status")
     @Enumerated(EnumType.STRING)
     private TableStatus tableStatus;
+
+    @CreatedDate
+    private LocalDate createAt;
+
+    @LastModifiedDate
+    private LocalDate lastModifiedAt;
 
     @ManyToOne
     private Restaurant restaurant;

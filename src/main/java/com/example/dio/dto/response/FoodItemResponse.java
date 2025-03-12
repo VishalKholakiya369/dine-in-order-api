@@ -15,7 +15,7 @@ public class FoodItemResponse {
 
     private String itemName;
 
-    private String itemCuisine;
+    private String cuisineType;
 
     private double itemPrice;
 

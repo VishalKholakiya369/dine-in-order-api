@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("${app.base-url}")
@@ -23,5 +25,12 @@ public class FoodItemController {
         FoodItemResponse foodItemResponse = foodItemService.createFoodItem(foodItemRequest,restaurantId);
        return ResponseBuilder.created("FoodItem created",foodItemResponse);
     }
-//aa
+
+    @GetMapping("foodItem/category")
+    public ResponseEntity<ResponseStructur<List<FoodItemResponse>>> findFoodItemsByCategory(
+            @RequestParam List<String> categories) {
+
+        List<FoodItemResponse> foodItems = foodItemService.findFoodItemsByCategory(categories);
+        return ResponseBuilder.ok("Food items found", foodItems);
+    }
 }

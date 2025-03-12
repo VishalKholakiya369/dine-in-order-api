@@ -1,11 +1,8 @@
 package com.example.dio.repository;
 
-import com.example.dio.model.CuisingType;
-import com.example.dio.model.Restaurant;
+import com.example.dio.model.CuisineType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface CuisineRepository extends JpaRepository<CuisingType, String> {
+public interface CuisineRepository extends JpaRepository<CuisineType, String> {
 
 }
