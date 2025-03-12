@@ -1,6 +1,7 @@
 package com.example.dio.service.impl;
 
 import com.example.dio.dto.request.RestaurantRequest;
+import com.example.dio.dto.response.FoodItemResponse;
 import com.example.dio.dto.response.RestaurantResponse;
 import com.example.dio.exception.CustomAccessDeniedException;
 import com.example.dio.exception.UserNotFoundByIdException;
@@ -33,14 +34,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         if(user instanceof Admin admin){
             Restaurant restaurant = restaurantMapper.mapToRestaurant(restaurantRequest);
 
-            List<CuisineType> cuisine = this.createNonExistingCuisines(restaurant.getCuisineTypes());
-            restaurant.setCuisineTypes(cuisine);
+            List<CuisineType> cuisines = this.createNonExistingCuisines(restaurant.getCuisineTypes());
+            restaurant.setCuisineTypes(cuisines);
             restaurant.setAdmin(admin);
               restaurantRepository.save(restaurant);
             return restaurantMapper.mapToRestaurantResponse(restaurant);
         }
         throw new CustomAccessDeniedException("Only admins can create a restaurant.");
     }
+
+
 
     private List<CuisineType> createNonExistingCuisines(List<CuisineType> cuisineTypes){
     return cuisineTypes.stream()

@@ -51,10 +51,10 @@ public interface RestaurantMapper {
         {
             return null;
         }
-        CuisineType cuisine1 =new CuisineType();
-        cuisine1.setCuisine(cuisineType);
+        CuisineType cuisineType1 =new CuisineType();
+        cuisineType1.setCuisine(cuisineType);
 
-        return cuisine1;
+        return cuisineType1;
     }
 }
 
