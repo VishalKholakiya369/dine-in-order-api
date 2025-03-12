@@ -59,5 +59,4 @@ public class FoodItem {
     private List<Category> categories;
 
 
-
 }

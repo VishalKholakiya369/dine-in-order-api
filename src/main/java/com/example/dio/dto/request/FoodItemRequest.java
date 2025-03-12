@@ -1,6 +1,5 @@
 package com.example.dio.dto.request;
 
-import com.example.dio.enums.DietType;
 import com.example.dio.enums.ItemAvailability;
 import com.example.dio.model.CuisineType;
 import jakarta.persistence.Column;
@@ -36,8 +35,4 @@ public class FoodItemRequest {
     private long itemStock;
 
     private ItemAvailability itemAvailability;
-
-    private DietType dietType;
-
-    private List<String> categories;
 }

@@ -16,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "restaurant_table")
 public class RestaurantTable {
 
     @Id
@@ -44,6 +45,5 @@ public class RestaurantTable {
 
     @ManyToMany(mappedBy = "tables")
     private List<Staff> staffs;
-
 
 }

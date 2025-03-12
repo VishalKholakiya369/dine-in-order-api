@@ -44,11 +44,11 @@ public class User {
 
     @CreatedDate
     @Column(name = "create_at")
-    private LocalDate createAt;
+    private LocalDateTime createAt;
 
     @LastModifiedDate
     @Column(name = "last_modified_at")
-    private LocalDate lastModifiedAt;
+    private LocalDateTime lastModifiedAt;
 
 
 }

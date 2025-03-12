@@ -40,5 +40,5 @@ public class RestaurantRequest {
     private LocalTime closes_at;
 
     private List<DietType> dietType;
-    private List<String> cuisineTypes;
+    private List<String> cuisingTypes;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-//@jakarta.persistence.Table(name = "restaurant")
+@Table(name = "restaurant")
 public class Restaurant {
 
     @Id
@@ -63,6 +63,5 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<FoodItem> foodItems;
-
 
 }

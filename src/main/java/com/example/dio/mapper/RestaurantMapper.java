@@ -42,19 +42,19 @@ public interface RestaurantMapper {
     /**
      * Converts a string to the corresponding {@link CuisineType} enum.
      *
-     * @param cuisineType The string representation of the cuisine type.
+     * @param cuisingType The string representation of the cuisine type.
      * @return The corresponding {@link CuisineType}  value.
      * @throws IllegalArgumentException if the provided string does not match any valid cuisine type.
      */
-    default CuisineType mapToCuisineType(String cuisineType){
-        if(cuisineType==null)
+    default CuisineType mapToCuisingType(String cuisingType){
+        if(cuisingType==null)
         {
             return null;
         }
-        CuisineType cuisine1 =new CuisineType();
-        cuisine1.setCuisine(cuisineType);
+        CuisineType cuisineType1 =new CuisineType();
+        cuisineType1.setCuisine(cuisingType);
 
-        return cuisine1;
+        return cuisineType1;
     }
 }
 
