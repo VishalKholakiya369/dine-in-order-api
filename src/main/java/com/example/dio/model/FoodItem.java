@@ -5,6 +5,9 @@ import com.example.dio.enums.ItemAvailability;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +15,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-
+@EntityListeners(AuditingEntityListener.class)
+@Table(name="food_item",indexes = {@Index(name = "idr_name", columnList = "item_name")})
 public class FoodItem {
 
     @Id
@@ -22,9 +26,6 @@ public class FoodItem {
 
     @Column(name = "item_name")
     private String itemName;
-
-    @Column(name = "item_cuisine")
-    private String itemCuisine;
 
     @Column(name = "item_price")
     private double itemPrice;
@@ -39,8 +40,13 @@ public class FoodItem {
     @Column(name = "item_availability")
     private ItemAvailability itemAvailability;
 
+    @Enumerated(EnumType.STRING)
     private DietType dietType;
+
+    @CreatedDate
     private LocalDate createAt;
+
+    @LastModifiedDate
     private LocalDate lastModifiedAt;
 
     @ManyToOne
@@ -49,7 +55,7 @@ public class FoodItem {
     @ManyToOne
     private Restaurant restaurant;
 
-    @ManyToMany(mappedBy = "foodItems")
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
 
 

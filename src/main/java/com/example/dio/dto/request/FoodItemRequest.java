@@ -2,6 +2,7 @@ package com.example.dio.dto.request;
 
 import com.example.dio.enums.DietType;
 import com.example.dio.enums.ItemAvailability;
+import com.example.dio.model.CuisineType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,7 +20,7 @@ public class FoodItemRequest {
     @Size(min = 2, max = 50, message = "Item name must be between 2 and 50 characters")
     private String itemName;
 
-    private String itemCuisine;
+    private String cuisineType;
 
     @Positive(message = "Item price must be greater than 0")
     private double itemPrice;

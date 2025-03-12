@@ -15,7 +15,7 @@ public class Category {
     @Id
     private String category;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categories")
     private List<FoodItem> foodItems;
 
 
