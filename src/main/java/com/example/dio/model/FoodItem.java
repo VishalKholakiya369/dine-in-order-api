@@ -58,5 +58,8 @@ public class FoodItem {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
 
+    @OneToMany(mappedBy =  "foodItem")
+    private List<CartItem> cartItems;
+
 
 }
