@@ -41,10 +41,12 @@ public class CartItemServiceImpl implements CartItemService {
 
     private static  CartItem getCartItem(int quantity,FoodItem foodItem,RestaurantTable restaurantTable){
         CartItem cartItem = new CartItem();
+        cartItem.setOrdered(false);
         cartItem.setFoodItem(foodItem);
         cartItem.setQuantity(quantity);
         cartItem.setTotalPrice(foodItem.getItemPrice()* cartItem.getQuantity());
         cartItem.setRestaurantTable(restaurantTable);
+
         return  cartItem;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.dio.dto.response;
 
-import com.example.dio.enums.OrderStatus;
+import com.example.dio.enums.IsOrdered;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +15,5 @@ public class CartItemResponse {
 
     private FoodItemResponse foodItem;
 
-    private OrderStatus isOrdered;
+    private boolean isOrdered;
 }
