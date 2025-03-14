@@ -1,13 +1,10 @@
 package com.example.dio.model;
 
 
-import com.example.dio.enums.OrderStatus;
+import com.example.dio.enums.IsOrdered;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.yaml.snakeyaml.events.Event;
-
-import javax.naming.Name;
 
 @Entity
 @Getter
@@ -26,12 +23,15 @@ public class CartItem {
     private int quantity;
 
     @Column(name = "is_ordered")
-    private OrderStatus isOrdered;
+    private boolean isOrdered;
 
     @ManyToOne
     private RestaurantTable restaurantTable;
 
     @ManyToOne
     private FoodItem foodItem;
+
+    @ManyToOne
+    private Order order;
 
 }
