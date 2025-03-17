@@ -22,7 +22,9 @@ public class FoodItemController {
 
     @PostMapping("foodItem/{restaurantId}")
     public ResponseEntity<ResponseStructur<FoodItemResponse>> createFoodItem(@Valid @RequestBody FoodItemRequest foodItemRequest, @PathVariable long restaurantId){
+        System.out.println("in controller : "+foodItemRequest.getCuisineType());
         FoodItemResponse foodItemResponse = foodItemService.createFoodItem(foodItemRequest,restaurantId);
+
        return ResponseBuilder.created("FoodItem created",foodItemResponse);
     }
 

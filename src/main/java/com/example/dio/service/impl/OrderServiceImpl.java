@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
         if(!cartItemList.isEmpty()){
             order = new Order();
-            order.setOrderStatus(OrderStatus.Build);
+            order.setOrderStatus(OrderStatus.NotBuild);
             order.setCartItems(cartItemList);
             order.setRestaurantTable(restaurantTable);
             order.setTotalAmount(cartItemList.stream()

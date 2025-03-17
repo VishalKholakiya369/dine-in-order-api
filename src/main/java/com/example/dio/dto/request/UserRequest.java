@@ -24,4 +24,28 @@ public class UserRequest {
     @NotBlank(message = "Phone number can not be blank ")
     @Pattern(regexp = "^[7-9]\\d{9}$",message = "Invalid phone number")
     private String phno;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhno() {
+        return phno;
+    }
+
+    public void setPhno(String phno) {
+        this.phno = phno;
+    }
 }
