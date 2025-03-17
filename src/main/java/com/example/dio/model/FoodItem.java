@@ -13,8 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="food_item",indexes = {@Index(name = "idr_name", columnList = "item_name")})
 public class FoodItem {
@@ -62,4 +61,107 @@ public class FoodItem {
     private List<CartItem> cartItems;
 
 
+    public long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public long getItemStock() {
+        return itemStock;
+    }
+
+    public void setItemStock(long itemStock) {
+        this.itemStock = itemStock;
+    }
+
+    public ItemAvailability getItemAvailability() {
+        return itemAvailability;
+    }
+
+    public void setItemAvailability(ItemAvailability itemAvailability) {
+        this.itemAvailability = itemAvailability;
+    }
+
+    public DietType getDietType() {
+        return dietType;
+    }
+
+    public void setDietType(DietType dietType) {
+        this.dietType = dietType;
+    }
+
+    public LocalDate getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDate getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt(LocalDate lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
+    }
+
+    public CuisineType getCuisineType() {
+        return cuisineType;
+    }
+
+    public void setCuisineType(CuisineType cuisineType) {
+        this.cuisineType = cuisineType;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 }
