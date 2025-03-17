@@ -42,6 +42,8 @@ public class FoodItemServiceImpl implements FoodItemService {
         // Map request to entity
         FoodItem foodItem = foodItemMapper.mapToFoodItem(foodItemRequest);
 
+        System.out.println("in fooditem : " + foodItem.getCuisineType());
+
         CuisineType cuisine = createCuisineIfNotExist(foodItem.getCuisineType());
 
         foodItem.setRestaurant(restaurant);

@@ -9,8 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.message.Message;
 
-@Getter
-@Setter
+
 public class RegistrationRequest {
 
     @NotEmpty(message = "Username can not be null or blank")
@@ -35,4 +34,44 @@ public class RegistrationRequest {
     private String phNo;
 
     private UserRole role;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhNo() {
+        return phNo;
+    }
+
+    public void setPhNo(String phNo) {
+        this.phNo = phNo;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 }

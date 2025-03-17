@@ -9,8 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+
 public class OrderResponse {
 
     private OrderStatus orderStatus;
@@ -22,4 +21,35 @@ public class OrderResponse {
     private double totalAmount;
 
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public LocalDateTime getOrderAt() {
+        return orderAt;
+    }
+
+    public void setOrderAt(LocalDateTime orderAt) {
+        this.orderAt = orderAt;
+    }
+
+    public List<CartItemResponse> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItemResponse> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 }

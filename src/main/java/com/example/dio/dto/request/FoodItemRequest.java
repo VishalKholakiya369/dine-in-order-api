@@ -11,8 +11,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
+
 public class FoodItemRequest {
 
     @NotBlank(message = "Item name cannot be empty")
@@ -37,4 +36,61 @@ public class FoodItemRequest {
     private ItemAvailability itemAvailability;
 
     private List<String> categories;
+
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public void setCuisineType(String cuisineType) {
+        this.cuisineType = cuisineType;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public void setItemStock(long itemStock) {
+        this.itemStock = itemStock;
+    }
+
+    public void setItemAvailability(ItemAvailability itemAvailability) {
+        this.itemAvailability = itemAvailability;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getCuisineType() {
+        return cuisineType;
+    }
+
+    public double getItemPrice() {
+        return itemPrice;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public long getItemStock() {
+        return itemStock;
+    }
+
+    public ItemAvailability getItemAvailability() {
+        return itemAvailability;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
 }

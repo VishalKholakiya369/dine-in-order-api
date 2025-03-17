@@ -13,8 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "restaurant_table")
 public class RestaurantTable {
@@ -52,4 +50,84 @@ public class RestaurantTable {
     @OneToMany(mappedBy = "restaurantTable")
     private List<Order> orders;
 
+
+    public long getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(long tableId) {
+        this.tableId = tableId;
+    }
+
+    public long getTableNo() {
+        return tableNo;
+    }
+
+    public void setTableNo(long tableNo) {
+        this.tableNo = tableNo;
+    }
+
+    public long getTableCapacity() {
+        return tableCapacity;
+    }
+
+    public void setTableCapacity(long tableCapacity) {
+        this.tableCapacity = tableCapacity;
+    }
+
+    public TableStatus getTableStatus() {
+        return tableStatus;
+    }
+
+    public void setTableStatus(TableStatus tableStatus) {
+        this.tableStatus = tableStatus;
+    }
+
+    public LocalDate getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDate getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt(LocalDate lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public List<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(List<Staff> staffs) {
+        this.staffs = staffs;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
