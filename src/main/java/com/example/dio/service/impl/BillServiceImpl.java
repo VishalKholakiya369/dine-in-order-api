@@ -7,16 +7,19 @@ import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.mapper.BillMapper;
 import com.example.dio.model.Bill;
 import com.example.dio.model.Order;
+import com.example.dio.model.Restaurant;
 import com.example.dio.model.RestaurantTable;
 import com.example.dio.repository.BillRepository;
 import com.example.dio.repository.OrderRepository;
+import com.example.dio.repository.RestaurantRepository;
 import com.example.dio.repository.TableRepository;
 import com.example.dio.service.BillService;
+import com.example.dio.util.BillGenerator;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,6 +29,8 @@ public class BillServiceImpl implements BillService {
     private final TableRepository tableRepository;
     private final OrderRepository orderRepository;
     private final BillMapper billMapper;
+    private final RestaurantRepository restaurantRepository;
+    private final BillGenerator billGenerator;
 
     @Override
     public BillResponse createBill(long tableId) {
@@ -62,11 +67,23 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public Byte[] findBillById(long billId) {
-        Bill bill = billRepository.findById(billId)
-                .orElseThrow(() -> new UserNotFoundByIdException("No bill found with " + billId + " id"));
+    public byte[] pdfGeneration(long billId) throws Exception{
 
-        billMapper.mapToBillResponse(bill);
-        return null;
+
+        BillResponse response = this.findById(billId);
+
+        long foodId = response.getOrders().getFirst().getCartItems().getFirst().getFoodItem().getItemId();
+
+        Restaurant restaurant = restaurantRepository.findNameByFoodItems_ItemId(foodId);
+
+        long orderId = response.getOrders().getFirst().getOrderId();
+
+        Order order = orderRepository.findRestaurantTableByOrderId(orderId);
+
+        Map<String, Object> bill = Map.of(
+                "restaurantName",restaurant.getName(),
+                "tableNo",order.getOrderId(),
+                "bill",response);
+        return billGenerator.generatePdf("RestaurantBill",bill);
     }
 }

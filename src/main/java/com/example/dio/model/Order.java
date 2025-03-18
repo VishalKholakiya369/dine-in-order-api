@@ -31,7 +31,7 @@ public class Order {
     @Column(name = "total_amount")
     private double totalAmount;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
     @ManyToOne

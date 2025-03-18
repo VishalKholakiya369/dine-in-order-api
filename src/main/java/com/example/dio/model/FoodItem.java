@@ -60,6 +60,16 @@ public class FoodItem {
     @OneToMany(mappedBy =  "foodItem")
     private List<CartItem> cartItems;
 
+    @OneToMany(mappedBy = "foodItem")
+    private List<Image> images;
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     public long getItemId() {
         return itemId;
