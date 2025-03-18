@@ -13,3 +13,7 @@ spring:
 
 app:
   base-url: /api/v1
+  cloudinary:
+    cloud-name: ${CLOUD_NAME}
+    api-key: ${API-KEY}
+    api-secret: ${API-SECRET}

@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "bill")
 public class Bill {

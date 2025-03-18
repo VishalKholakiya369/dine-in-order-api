@@ -51,7 +51,7 @@ public class Restaurant {
     @LastModifiedDate
     private LocalDate lastModifiedAt;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<CuisineType> cuisineTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)

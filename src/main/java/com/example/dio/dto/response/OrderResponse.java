@@ -12,6 +12,8 @@ import java.util.List;
 
 public class OrderResponse {
 
+    private long orderId;
+
     private OrderStatus orderStatus;
 
     private LocalDateTime orderAt;
@@ -20,6 +22,13 @@ public class OrderResponse {
 
     private double totalAmount;
 
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 
     public OrderStatus getOrderStatus() {
         return orderStatus;

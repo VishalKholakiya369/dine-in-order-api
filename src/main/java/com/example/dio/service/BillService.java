@@ -7,5 +7,5 @@ public interface BillService {
 
     BillResponse findById(long billId);
 
-    Byte[] findBillById(long billId);
+    byte[] pdfGeneration(long billId) throws Exception;
 }
