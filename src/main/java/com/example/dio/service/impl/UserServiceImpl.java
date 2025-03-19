@@ -12,6 +12,7 @@ import com.example.dio.repository.UserRepository;
 import com.example.dio.service.UserService;
 import com.example.dio.exception.UserNotFoundByIdException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponse registerUser(RegistrationRequest registrationRequest) {
@@ -28,8 +30,14 @@ public class UserServiceImpl implements UserService {
        // this.mapToNewUser(user,user2);
        // this.mapToEntity(registrationRequest,user);
         userMapper.mapToEntity(registrationRequest, user);
+        this.EncryptPassword(user);
         userRepository.save(user);
         return userMapper.mapToUserResponse(user);
+    }
+
+    private void EncryptPassword(User user){
+      String encodedPassword =  passwordEncoder.encode(user.getPassword());
+      user.setPassword(encodedPassword);
     }
 
 
