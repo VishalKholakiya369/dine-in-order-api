@@ -27,6 +27,16 @@ public class FoodItemResponse {
 
     private List<String> categories;
 
+    private List<String> images;
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
     public long getItemId() {
         return itemId;
     }

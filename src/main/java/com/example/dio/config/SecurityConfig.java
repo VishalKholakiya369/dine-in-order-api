@@ -26,7 +26,7 @@ public class SecurityConfig {
         String baseUrl = env.getBaseUrl();
 
      return http.csrf(csrf->csrf.disable())
-                .securityMatchers(match ->match.requestMatchers(baseUrl + "/**"))//basically used to configure filter chain to acept request made to a specific pattern default ="/**"
+                .securityMatchers(match ->match.requestMatchers(baseUrl + "/**","/login/**","/logout/**"))//basically used to configure filter chain to acept request made to a specific pattern default ="/**"
                 .authorizeHttpRequests(authorize->authorize.requestMatchers(
                         baseUrl+"/register",
                         baseUrl+"/restaurants/{restaurantId}/food-items"
