@@ -12,6 +12,7 @@ import java.util.List;
 
 public class FoodItemResponse {
 
+    private long itemId;
     private String itemName;
 
     private String cuisineType;
@@ -26,6 +27,13 @@ public class FoodItemResponse {
 
     private List<String> categories;
 
+    public long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
+    }
 
     public String getItemName() {
         return itemName;
