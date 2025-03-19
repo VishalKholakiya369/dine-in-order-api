@@ -4,6 +4,7 @@ import com.example.dio.dto.response.CartItemResponse;
 import com.example.dio.model.CartItem;
 import com.example.dio.model.Category;
 import com.example.dio.model.CuisineType;
+import com.example.dio.model.Image;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -25,4 +26,12 @@ public interface CartItemMapper {
         }
         return cuisineType.getCuisine();
     }
+    default String mapToString(Image image){
+        if(image ==null)
+        {
+            return null;
+        }
+        return image.getImageUrl();
+    }
+
 }

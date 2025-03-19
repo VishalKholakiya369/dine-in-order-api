@@ -5,6 +5,7 @@ import com.example.dio.dto.response.FoodItemResponse;
 import com.example.dio.model.Category;
 import com.example.dio.model.CuisineType;
 import com.example.dio.model.FoodItem;
+import com.example.dio.model.Image;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -53,5 +54,23 @@ public interface FoodItemMapper {
         cuisine1.setCuisine(cuisineType);
 
         return cuisine1;
+    }
+
+    default String mapToString(Image image){
+        if(image ==null)
+        {
+            return null;
+        }
+        return image.getImageUrl();
+    }
+    default Image mapToImage(String image){
+        if(image==null)
+        {
+            return null;
+        }
+        Image image1 =new Image();
+        image1.setImageUrl(image);
+
+        return image1;
     }
 }
