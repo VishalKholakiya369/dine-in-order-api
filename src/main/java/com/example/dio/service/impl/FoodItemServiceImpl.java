@@ -4,14 +4,8 @@ import com.example.dio.dto.request.FoodItemRequest;
 import com.example.dio.dto.response.FoodItemResponse;
 import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.mapper.FoodItemMapper;
-import com.example.dio.model.Category;
-import com.example.dio.model.CuisineType;
-import com.example.dio.model.FoodItem;
-import com.example.dio.model.Restaurant;
-import com.example.dio.repository.CategoryRepository;
-import com.example.dio.repository.CuisineRepository;
-import com.example.dio.repository.FoodItemRepository;
-import com.example.dio.repository.RestaurantRepository;
+import com.example.dio.model.*;
+import com.example.dio.repository.*;
 import com.example.dio.service.FoodItemService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,6 +24,7 @@ public class FoodItemServiceImpl implements FoodItemService {
     private  final FoodItemRepository foodItemRepository;
     private final FoodItemMapper foodItemMapper;
     private final CategoryRepository categoryRepository;
+    private final ImageRepository imageRepository;
 
 
     @Transactional
@@ -39,10 +34,15 @@ public class FoodItemServiceImpl implements FoodItemService {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new UserNotFoundByIdException("Restaurant not found"));
 
+
+
         // Map request to entity
         FoodItem foodItem = foodItemMapper.mapToFoodItem(foodItemRequest);
 
         System.out.println("in fooditem : " + foodItem.getCuisineType());
+
+        List<Image> images = createNonExistingImage(foodItem.getImages());
+        foodItem.setImages(images);
 
         CuisineType cuisine = createCuisineIfNotExist(foodItem.getCuisineType());
 
@@ -117,6 +117,15 @@ public class FoodItemServiceImpl implements FoodItemService {
                         .orElseGet(()-> {
                             log.info("Category not found creating one with the name {}", type.getCategory());
                             return categoryRepository.save(type);
+                        }))
+                .toList();
+    }
+
+    private List<Image> createNonExistingImage(List<Image> images){
+        return images.stream()
+                .map(type -> imageRepository.findById(type.getImageUrl())
+                        .orElseGet(()->{
+                            return imageRepository.save(type);
                         }))
                 .toList();
     }

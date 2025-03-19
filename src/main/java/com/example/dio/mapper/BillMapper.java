@@ -4,6 +4,7 @@ import com.example.dio.dto.response.BillResponse;
 import com.example.dio.model.Bill;
 import com.example.dio.model.Category;
 import com.example.dio.model.CuisineType;
+import com.example.dio.model.Image;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -26,4 +27,13 @@ public interface BillMapper {
         }
         return cuisineType.getCuisine();
     }
+
+    default String mapToString(Image image){
+        if(image ==null)
+        {
+            return null;
+        }
+        return image.getImageUrl();
+    }
+
 }
