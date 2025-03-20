@@ -9,6 +9,7 @@ import com.example.dio.util.ResponseStructur;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class FoodItemController {
 
     private final FoodItemService foodItemService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("foodItem/{restaurantId}")
     public ResponseEntity<ResponseStructur<FoodItemResponse>> createFoodItem(@Valid @RequestBody FoodItemRequest foodItemRequest, @PathVariable long restaurantId){
         System.out.println("in controller : "+foodItemRequest.getCuisineType());

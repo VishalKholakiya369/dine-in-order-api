@@ -4,6 +4,7 @@ import com.example.dio.enums.DietType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -51,6 +52,9 @@ public class Restaurant {
     @LastModifiedDate
     private LocalDate lastModifiedAt;
 
+    @CreatedBy
+    private String createBy;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<CuisineType> cuisineTypes;
 
@@ -63,6 +67,13 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant")
     private List<FoodItem> foodItems;
 
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
     public long getRestaurantId() {
         return restaurantId;

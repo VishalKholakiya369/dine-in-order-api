@@ -1,9 +1,11 @@
-package com.example.dio.config;
+package com.example.dio.security.config;
 
+import com.example.dio.config.AppEnv;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfig {
     private final AppEnv env;
 
@@ -31,6 +34,7 @@ public class SecurityConfig {
                         baseUrl+"/register",
                         baseUrl+"/restaurants/{restaurantId}/food-items"
                 ).permitAll()
+                       // .requestMatchers(baseUrl+"/restaurant_register/{userId}").hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .formLogin(Customizer.withDefaults())

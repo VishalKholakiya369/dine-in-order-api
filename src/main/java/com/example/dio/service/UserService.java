@@ -21,7 +21,7 @@ public interface UserService {
    * @param userId The containing user id.
    * @return A containing the user's information.
    */
-  public  UserResponse findUserById(long userId);
+  public  UserResponse findUserById();
 
   /**
    * Update a user based on the user id
@@ -30,7 +30,7 @@ public interface UserService {
    * @param userRequest The containing user's previous data.
    * @return UserResponse the dto that contains user updated information.
    */
-  public UserResponse updateUserById(long userId, UserRequest userRequest);
+  public UserResponse updateUserById(UserRequest userRequest);
 
 
 }

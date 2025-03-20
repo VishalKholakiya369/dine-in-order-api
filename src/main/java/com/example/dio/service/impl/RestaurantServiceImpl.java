@@ -13,6 +13,7 @@ import com.example.dio.model.User;
 import com.example.dio.repository.CuisineRepository;
 import com.example.dio.repository.RestaurantRepository;
 import com.example.dio.repository.UserRepository;
+import com.example.dio.security.util.UserIdentity;
 import com.example.dio.service.RestaurantService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,20 +28,20 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final UserRepository userRepository;
     private final RestaurantMapper restaurantMapper;
     private final CuisineRepository cuisineRepository;
+    private final UserIdentity userIdentity;
 
     @Override
-    public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest, long userId) {
-        User user = userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("user not found"));
-        if(user instanceof Admin admin){
+    public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest) {
+        User user = userIdentity.getCurrentUser();
+
             Restaurant restaurant = restaurantMapper.mapToRestaurant(restaurantRequest);
 
             List<CuisineType> cuisines = this.createNonExistingCuisines(restaurant.getCuisineTypes());
             restaurant.setCuisineTypes(cuisines);
-            restaurant.setAdmin(admin);
+            restaurant.setAdmin((Admin) user);
               restaurantRepository.save(restaurant);
             return restaurantMapper.mapToRestaurantResponse(restaurant);
-        }
-        throw new CustomAccessDeniedException("Only admins can create a restaurant.");
+
     }
 
 

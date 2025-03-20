@@ -44,7 +44,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/account")
     @Operation(summary = "Find User by ID", description = "Fetches a user from the database using the user ID.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "User found successfully"),
@@ -55,13 +55,13 @@ public class UserController {
                             @Content(schema = @Schema(implementation = SimpleErrorResponse.class))
                     }),
             })
-    public ResponseEntity<ResponseStructur<UserResponse>> findUserById(@PathVariable long userId) {
-        UserResponse response = userService.findUserById(userId);
+    public ResponseEntity<ResponseStructur<UserResponse>> findUserById() {
+        UserResponse response = userService.findUserById();
         return ResponseBuilder.ok("user found",response);
     }
 
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/users")
     @Operation(summary = "Update User by ID", description = "Updates an existing user's details based on the provided user ID.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "User updated successfully"),
@@ -75,8 +75,8 @@ public class UserController {
                             @Content(schema = @Schema(implementation = SimpleErrorResponse.class))
                     }),
             })
-    public ResponseEntity<ResponseStructur<UserResponse>> updateUserById(@PathVariable long userId, @RequestBody UserRequest userRequest) {
-        UserResponse response = userService.updateUserById(userId, userRequest);
+    public ResponseEntity<ResponseStructur<UserResponse>> updateUserById( @RequestBody UserRequest userRequest) {
+        UserResponse response = userService.updateUserById(userRequest);
         return ResponseBuilder.ok("User Updated",response);
     }
 
