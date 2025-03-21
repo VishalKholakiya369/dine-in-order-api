@@ -9,7 +9,7 @@ import java.util.List;
 public interface RestaurantService {
 
 
-    public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest, long userId);
+    public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest);
 
 
 }

@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-
 public class UserResponse {
     private long userId;
     private String username;

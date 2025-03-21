@@ -1,5 +1,6 @@
 package com.example.dio.util;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,6 +23,17 @@ public class ResponseBuilder {
                 .data(data)
                 .build();
         return ResponseEntity.status(status).body(structur);
+    }
+
+    public static <T> ResponseEntity<ResponseStructur<T>> success(HttpStatus status, HttpHeaders headers, String message, T data) {
+        ResponseStructur<T> structur = ResponseStructur.<T>builder()
+                .status(status.value())
+                .message(message)
+                .data(data)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .headers(headers)
+                .body(structur);
     }
 
     /**
