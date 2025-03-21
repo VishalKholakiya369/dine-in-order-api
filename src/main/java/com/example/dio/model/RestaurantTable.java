@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,6 +39,9 @@ public class RestaurantTable {
     @LastModifiedDate
     private LocalDate lastModifiedAt;
 
+    @CreatedBy
+    private String createdBy;
+
     @ManyToOne
     private Restaurant restaurant;
 
@@ -50,6 +54,13 @@ public class RestaurantTable {
     @OneToMany(mappedBy = "restaurantTable")
     private List<Order> orders;
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public long getTableId() {
         return tableId;

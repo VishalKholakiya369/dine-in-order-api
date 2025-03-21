@@ -9,6 +9,7 @@ import com.example.dio.util.ResponseStructur;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +21,10 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService ;
 
-    @PostMapping("/restaurant_register/{userId}")
-    public ResponseEntity<ResponseStructur<RestaurantResponse>> createRestaurant(@Valid @RequestBody RestaurantRequest restaurantRequest,@PathVariable long userId){
-        RestaurantResponse restaurantResponse = restaurantService.createRestaurant(restaurantRequest,userId);
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/restaurant_register")
+    public ResponseEntity<ResponseStructur<RestaurantResponse>> createRestaurant(@Valid @RequestBody RestaurantRequest restaurantRequest){
+        RestaurantResponse restaurantResponse = restaurantService.createRestaurant(restaurantRequest);
         return ResponseBuilder.created("Restaurant Created",restaurantResponse);
     }
 

@@ -13,7 +13,20 @@ spring:
 
 app:
   base-url: /api/v1
+  domain:
+    name: ${DOMAIN_NAME}
+    secure: ${DOMAIN_SECURE}
+    same-site: ${DOMAIN_SAME_SITE}
   cloudinary:
     cloud-name: ${CLOUD_NAME}
     api-key: ${API-KEY}
     api-secret: ${API-SECRET}
+
+
+
+  security:
+    secret: ${APP_SECRET}
+    token-validity:
+      access-validity: 3600
+      refresh-validity: 1296000
+

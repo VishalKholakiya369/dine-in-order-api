@@ -1,5 +1,6 @@
 package com.example.dio.service.impl;
 
+import com.example.dio.security.util.UserIdentity;
 import com.example.dio.dto.request.RegistrationRequest;
 import com.example.dio.dto.request.UserRequest;
 import com.example.dio.dto.response.UserResponse;
@@ -10,7 +11,6 @@ import com.example.dio.model.Staff;
 import com.example.dio.model.User;
 import com.example.dio.repository.UserRepository;
 import com.example.dio.service.UserService;
-import com.example.dio.exception.UserNotFoundByIdException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserIdentity userIdentity;
 
     @Override
     public UserResponse registerUser(RegistrationRequest registrationRequest) {
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.mapToUserResponse(user);
     }
 
+    @Override
+    public UserResponse findUserById() {
+        return null;
+    }
+
     private void EncryptPassword(User user){
       String encodedPassword =  passwordEncoder.encode(user.getPassword());
       user.setPassword(encodedPassword);
@@ -44,23 +50,24 @@ public class UserServiceImpl implements UserService {
 
 
 
-    @Override
-    public UserResponse findUserById(long userId) {
-//        User user= userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Faild to find user"));
-//        return this.mapToUserResponse(user);
-        return userRepository.findById(userId)
-                .map(userMapper::mapToUserResponse)
-                .orElseThrow(()-> new UserNotFoundByIdException("Faild to find user,user not found by id"));
-    }
+//    @Override
+//    public UserResponse findUserById() {
+//        User user= userIdentity.getCurrentUser();
+//   //     return this.mapToUserResponse(user);
+//
+//     //  return userMapper.mapToUserResponse();
+////                .map(userMapper::mapToUserResponse)
+////                .orElseThrow(()-> new UserNotFoundByIdException("Faild to find user,user not found by id"));
+//    }
 
     @Override
-    public UserResponse updateUserById(long userId, UserRequest userRequest) {
-        User existingUser = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundByIdException("Failed to find user"));
+    public UserResponse updateUserById(UserRequest userRequest) {
+        User existingUser = userIdentity.getCurrentUser();
+
         userMapper.mapToNewUser(userRequest, existingUser);
-        User updatedUser = userRepository.save(existingUser);
+        userRepository.save(existingUser);
       //  existingUser.setUsername(updatedUser.getUsername());
-        return userMapper.mapToUserResponse(updatedUser);
+        return userMapper.mapToUserResponse(existingUser);
     }
 
     /**

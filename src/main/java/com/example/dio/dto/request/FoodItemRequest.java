@@ -1,5 +1,6 @@
 package com.example.dio.dto.request;
 
+import com.example.dio.dto.rules.Name;
 import com.example.dio.enums.ItemAvailability;
 import com.example.dio.model.CuisineType;
 import jakarta.persistence.Column;
@@ -14,8 +15,7 @@ import java.util.List;
 
 public class FoodItemRequest {
 
-    @NotBlank(message = "Item name cannot be empty")
-    @Size(min = 2, max = 50, message = "Item name must be between 2 and 50 characters")
+    @Name
     private String itemName;
 
     private String cuisineType;

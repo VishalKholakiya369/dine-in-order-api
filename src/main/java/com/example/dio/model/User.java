@@ -12,9 +12,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="users")
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
@@ -25,20 +26,20 @@ public class User {
     private long userId;
 
     @Column(name = "username")
-   private String username;
+    private String username;
 
     @Column(name = "email")
-   private String email;
+    private String email;
 
     @Column(name = "password")
-   private String password;
+    private String password;
 
     @Column(name = "ph_no")
-   private String phNo;
+    private String phNo;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
-   private UserRole role;
+    private UserRole role;
 
     @CreatedDate
     @Column(name = "create_at")

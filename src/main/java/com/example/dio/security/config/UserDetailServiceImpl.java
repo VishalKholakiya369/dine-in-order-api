@@ -1,4 +1,4 @@
-package com.example.dio.config.Security;
+package com.example.dio.security.config;
 
 import com.example.dio.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         return User.builder()
                 .username(user.getEmail())
                 .password(user.getPassword())
+                .authorities(user.getRole().name())
                 .build();
-
     }
 }
