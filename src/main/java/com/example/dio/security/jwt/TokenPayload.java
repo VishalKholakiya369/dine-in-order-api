@@ -1,10 +1,11 @@
 package com.example.dio.security.jwt;
 
+import java.time.Instant;
 import java.util.Map;
 
 public record TokenPayload(
         Map<String, Object > claims,
-        long issuedAt,
-        long expiration
+        Instant issuedAt,
+        Instant expiration
 ) {
 }
