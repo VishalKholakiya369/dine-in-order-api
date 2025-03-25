@@ -6,4 +6,6 @@ import com.example.dio.dto.request.LoginRequest;
 public interface AuthService {
 
     public AuthRecord login(LoginRequest request);
+
+    AuthRecord refreshLogin(String refreshToken);
 }
