@@ -25,8 +25,14 @@ app:
 
 
   security:
+    public-endpoints:
+      - /login
+      - /register
+      - /restaurants/{restaurantId}/food-items
+
     secret: ${APP_SECRET}
     token-validity:
       access-validity: 3600
       refresh-validity: 1296000
+
 

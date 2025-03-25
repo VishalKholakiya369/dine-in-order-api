@@ -1,6 +1,9 @@
 package com.example.dio.security.jwt;
 
 import com.example.dio.config.AppEnv;
+import com.example.dio.exception.InvalidJWTException;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -26,4 +29,15 @@ public class JWTService {
                 .compact();
     }
 
+    public Claims parseToken(String token) {
+       try{
+           return Jwts.parserBuilder()
+                   .setSigningKey(KeyHolder.getKey(env.getSecurity().getSecret()))
+                   .build()
+                   .parseClaimsJws(token)
+                   .getBody();
+       }catch (JwtException | IllegalArgumentException e){
+           throw new InvalidJWTException("Invalid! failed to pass token ,Invalid JWT");
+        }
+    }
 }

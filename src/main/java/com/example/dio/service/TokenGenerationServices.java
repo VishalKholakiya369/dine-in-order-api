@@ -17,6 +17,23 @@ public class TokenGenerationServices {
 
     private final TokenGeneratorServiceHelper tokenGeneratorServiceHelper;
 
+    public HttpHeaders grantAccessToken(AuthRecord authRecord) {
+        Map<String,Object> claim = setClaim(authRecord);
+
+        String newAccessToken = tokenGeneratorServiceHelper.generateToken(
+                TokenType.ACCESS,
+                claim,
+                Instant.ofEpochMilli(authRecord.accessExpiration())
+        );
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.SET_COOKIE, newAccessToken);
+
+        return headers;
+    }
+
+
     public HttpHeaders grantAccessAndRefreshToken(AuthRecord authRecord) {
 
         Map<String, Object> claim = setClaim(authRecord);
@@ -24,13 +41,13 @@ public class TokenGenerationServices {
         String refreshCookie = tokenGeneratorServiceHelper.generateToken(TokenType.REFRESH, claim, Instant.ofEpochMilli(authRecord.refreshExpiration()));
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.SET_COOKIE,accessCookie);
-        headers.add(HttpHeaders.SET_COOKIE,refreshCookie);
+        headers.add(HttpHeaders.SET_COOKIE, accessCookie);
+        headers.add(HttpHeaders.SET_COOKIE, refreshCookie);
         return headers;
 
     }
 
-    private Map<String, Object> setClaim(AuthRecord authRecord) {
+    public Map<String, Object> setClaim(AuthRecord authRecord) {
         return Map.of(
                 ClaimName.USER_ID, authRecord.userId(),
                 ClaimName.USER_EMAIL, authRecord.email(),

@@ -10,10 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${app.base-url}")
@@ -29,5 +26,14 @@ public class AuthController {
         AuthRecord record = authService.login(request);
         HttpHeaders httpHeaders = tokenGenerationServices.grantAccessAndRefreshToken(record);
         return ResponseBuilder.success(HttpStatus.OK, httpHeaders, "login !!", record);
+    }
+
+    @PostMapping("/refresh-login")
+    private ResponseEntity<ResponseStructur<AuthRecord>> refreshLogin(@CookieValue("rt") String refreshToken){
+
+        AuthRecord record = authService.refreshLogin(refreshToken);
+        HttpHeaders httpHeaders = tokenGenerationServices.grantAccessToken(record);
+
+        return ResponseBuilder.success(HttpStatus.OK, httpHeaders, "New access token generated !!", record);
     }
 }
